@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Budget Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="header-brand">
+      <span class="brand-icon">₹</span>
+      <span class="brand-name">spendwise</span>
+    </div>
+    <p class="header-tagline">your money, made clear</p>
+  </header>
+
+  <main class="app-shell">
+
+    <!-- ── BALANCE HERO ── -->
+    <section class="balance-hero">
+      <p class="balance-label">Total Balance</p>
+      <h1 class="balance-amount" id="balanceDisplay">₹0.00</h1>
+
+      <div class="balance-cards">
+        <div class="mini-card income-card">
+          <span class="mini-icon">↑</span>
+          <div>
+            <p class="mini-label">Income</p>
+            <p class="mini-amount" id="incomeDisplay">₹0.00</p>
+          </div>
+        </div>
+        <div class="mini-divider"></div>
+        <div class="mini-card expense-card">
+          <span class="mini-icon">↓</span>
+          <div>
+            <p class="mini-label">Expenses</p>
+            <p class="mini-amount" id="expenseDisplay">₹0.00</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MAIN GRID ── -->
+    <div class="main-grid">
+
+      <!-- ADD TRANSACTION FORM -->
+      <aside class="form-panel">
+        <h2 class="panel-title">Add Transaction</h2>
+
+        <div class="form-group">
+          <label for="txDescription">Description</label>
+          <input
+            type="text"
+            id="txDescription"
+            placeholder="e.g. Grocery run"
+            maxlength="40"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="txAmount">Amount (₹)</label>
+          <input
+            type="number"
+            id="txAmount"
+            placeholder="0.00"
+            min="0"
+            step="0.01"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Type</label>
+          <div class="type-toggle">
+            <button class="type-btn active" id="btnExpense" data-type="expense">
+              Expense
+            </button>
+            <button class="type-btn" id="btnIncome" data-type="income">
+              Income
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="txCategory">Category</label>
+          <select id="txCategory">
+            <option value="food">🍜 Food</option>
+            <option value="transport">🚌 Transport</option>
+            <option value="shopping">🛍️ Shopping</option>
+            <option value="health">💊 Health</option>
+            <option value="entertainment">🎮 Entertainment</option>
+            <option value="salary">💼 Salary</option>
+            <option value="other">📦 Other</option>
+          </select>
+        </div>
+
+        <button class="add-btn" id="addTransactionBtn">
+          + Add Transaction
+        </button>
+
+        <!-- Toast notification -->
+        <div class="toast" id="toast"></div>
+      </aside>
+
+      <!-- TRANSACTION LIST -->
+      <section class="list-panel">
+
+        <!-- FEATURE 3: Category Filter -->
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="food">🍜 Food</button>
+          <button class="filter-btn" data-filter="transport">🚌 Transport</button>
+          <button class="filter-btn" data-filter="shopping">🛍️ Shopping</button>
+          <button class="filter-btn" data-filter="health">💊 Health</button>
+          <button class="filter-btn" data-filter="entertainment">🎮 Entertainment</button>
+          <button class="filter-btn" data-filter="salary">💼 Salary</button>
+          <button class="filter-btn" data-filter="other">📦 Other</button>
+        </div>
+
+        <!-- Transaction list -->
+        <ul class="tx-list" id="transactionList">
+          <!-- JS will render items here -->
+        </ul>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="emptyState">
+          <span class="empty-icon">💸</span>
+          <p>No transactions yet.</p>
+          <p class="empty-sub">Add one to get started!</p>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    built to learn &nbsp;·&nbsp; vanilla js project
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
