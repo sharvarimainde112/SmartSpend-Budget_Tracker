@@ -32,7 +32,7 @@ exports.getTransaction=async(req,res)=>{
         let income=0;
         let expense=0;
 
-        transaction.forEach((tx)=>{
+        transactions.forEach((tx)=>{
             if(tx.type=='Income'){
                 income+=tx.amount;
             }else if(tx.type=='Expense'){
@@ -42,8 +42,8 @@ exports.getTransaction=async(req,res)=>{
 
         let totalBalance=income-expense;
         return res.status(200).json({success:true,summary:{totalBalance,totalincome:income,totalexpense:expense},
-            count:transaction.length,
-            data:transaction,
+            count:transactions.length,
+            data:transactions,
       });
 
 
