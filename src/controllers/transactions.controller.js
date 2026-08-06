@@ -8,7 +8,7 @@ const{description,amount,type,Category}=req.body;
 if(!description||!amount||!type){
     return res.status(400).json({message:'Please fill all the required fields'});
 }
-    const Transaction=await transaction.create({
+    const Transaction=await Transaction.create({
         user:req.user._id,
         description,
         amount,
@@ -54,3 +54,29 @@ exports.getTransaction=async(req,res)=>{
     }
 };
 
+exports.deleteTransaction=async(req,res)=>{
+    try{
+        const trans_id=req.params.id;
+
+        const trans=await Transaction.findById(trans_id);
+
+        if(!trans){
+            return res.status(404).json({message:'Transaction not found'});
+        }
+        if(Transaction.user.toString()!==req.params.id){
+            return res.status(401).json({message: 'Not authorized to delete this transaction'});
+        }
+    
+        await Transaction.deleteOne();
+
+        return res.status(200).json({success:true,message:'Transaction successfully deleted',data:{id:trans_id}});
+
+    }catch(error){
+        console.error("Error deleting Transaction",error);
+        if(error.kind=='ObjectId'){
+            return res.status(404).json({message:'Transaction not found'});
+        }
+        return res.status(500).json({message:'Server Error while deleting Transaction'});
+
+    }
+};
